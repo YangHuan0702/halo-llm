@@ -1,34 +1,296 @@
 # Repository Guidelines
 
+## Project Overview
+
+这是一个面向 LLM 和 Agent 工程的系统化学习路径仓库。项目目标是帮助学习者从基础的 LLM 概念理解，逐步掌握 Agent 系统、RAG 架构、评测监控和部署优化等核心工程能力。
+
+**核心特点：**
+- Documentation-first：以文档为主线，但要求每个章节都落实到代码和项目
+- Engineering-first：强调可运行、可验证、可交付，而非概念背诵
+- Assessment-driven：每章有明确的评分结构和晋级门槛
+- Resume-friendly：支持长期迭代式学习，不怕中断
+
 ## Project Structure & Module Organization
 
-This repository is a documentation-first learning path for LLM and Agent engineering. Most content lives under `AI_Agent_LLM_学习路径/`, organized by stage (`阶段0_...` through `阶段4_...`) and then by chapter (`章节01_...`, `章节02_...`). Each chapter is split into four fixed subdirectories:
+### 顶层结构
 
-- `学习资料/README.md`: reading and study notes
-- `理论考试/README.md`: theory questions
-- `代码考试/README.md`: implementation tasks
-- `实际项目/README.md`: capstone-style project work
+```
+AI_Agent_LLM_学习路径/
+├── README.md                           # 学习路径总览
+├── 提交流程.md                         # 提交答案和项目的格式
+├── 评分与晋级规则.md                   # 评分标准和晋级条件
+├── 学习进度总览.md                     # 长期学习进度追踪
+├── 当前学习状态.md                     # 快速恢复学习上下文
+├── 如何继续学习.md                     # 学习中断后的恢复指南
+├── 阶段0_准备与基础/                    # 2个章节
+├── 阶段1_应用框架与工作流编排/          # 2个章节
+├── 阶段2_Agent系统/                    # 2个章节
+├── 阶段3_RAG系统/                      # 3个章节
+└── 阶段4_评测_监控与部署优化/           # 3个章节
+```
 
-Top-level workflow documents such as `提交流程.md`, `评分与晋级规则.md`, `学习进度总览.md`, and `当前学习状态.md` define submission, scoring, and progress tracking.
+### 章节结构
+
+每个章节固定包含 4 个子目录：
+
+```
+阶段N_主题/
+└── 章节NN_主题/
+    ├── 学习资料/README.md              # 理论知识和工具链介绍
+    ├── 理论考试/README.md              # 概念理解验证
+    ├── 代码考试/README.md              # 核心能力实现
+    └── 实际项目/README.md              # 综合项目实践
+```
+
+### 学习阶段
+
+- **阶段0：准备与基础**（2章）
+  - 章节01_LLM基础与工程环境
+  - 章节02_Prompt_API_结构化输出
+
+- **阶段1：应用框架与工作流编排**（2章）
+  - 章节03_LangChain_LangGraph基础
+  - 章节04_Dify与n8n自动化编排
+
+- **阶段2：Agent 系统**（2章）
+  - 章节05_单Agent_多工具_记忆
+  - 章节06_多Agent_规划_人机协同
+
+- **阶段3：RAG 系统**（3章）
+  - 章节07_基础RAG_索引_召回
+  - 章节08_混合检索_Rerank_QueryRewrite
+  - 章节09_GraphRAG_知识图谱
+
+- **阶段4：评测、监控与部署优化**（3章）
+  - 章节10_自动化评测流水线
+  - 章节11_LLM全链路监控与可观测性
+  - 章节12_本地模型部署_量化_蒸馏_LoRA_vLLM
+
+## 默认技术栈
+
+### 核心语言与框架
+- **Python**: 3.11+
+- **Web 框架**: FastAPI
+- **开发环境**: Jupyter Notebook / VS Code
+
+### LLM 与 Agent 框架
+- **LangChain / LangGraph**: 应用框架与工作流编排
+- **Dify**: 可视化 Agent 构建平台
+- **n8n**: 自动化工作流编排工具
+
+### 向量数据库（任选其一）
+- FAISS
+- Elasticsearch
+- Milvus
+- Qdrant
+
+### 关系型数据库
+- PostgreSQL（推荐）
+- SQLite（简单场景）
+
+### 部署与优化
+- **Docker**: 容器化部署
+- **vLLM**: 本地模型部署与推理加速
+
+### 评测与监控（任选组合）
+- **可观测性框架**: OpenTelemetry
+- **LLM 监控工具**: Langfuse / Phoenix / Helicone
+- **传统监控**: Prometheus / Grafana
+
+## 评分与晋级机制
+
+### 总分结构
+每章满分 100 分：
+- 理论考试：25 分
+- 代码考试：35 分
+- 实际项目：40 分
+
+### 晋级门槛
+- **85+ 分**：可直接进入下一章节
+- **75-84 分**：可晋级，但必须补做薄弱项
+- **60-74 分**：不建议晋级，需补交修正版
+- **<60 分**：必须重做该章节
+
+### 单项硬性要求
+即使总分达标，以下任一项不达标也不能晋级：
+- 理论考试低于 15 分
+- 代码考试低于 20 分
+- 实际项目低于 24 分
+
+### 阶段结业要求
+每个阶段的最后一个章节，项目分必须达到 30 分以上，才算真正通过该阶段。
+
+## 学习进度管理
+
+### 进度追踪文件
+- **学习进度总览.md**：记录所有章节的状态、得分、评分记录
+- **当前学习状态.md**：只保留最关键的恢复信息，支持快速断点恢复
+
+### 状态说明
+- `未开始`：还没学
+- `学习中`：正在看资料或做题
+- `待评分`：已完成，等待评分
+- `需补做`：评分未通过，需要修正
+- `已通过`：通过，可以进入下一章节
+
+### 中断恢复
+- 长期中断后，先查看"当前学习状态.md"和"学习进度总览.md"
+- AI 助手会先读取这些文件，再帮助你恢复上下文
+- 支持碎片化学习，可只完成某章节的"学习资料"部分
 
 ## Build, Test, and Development Commands
 
-There is no single project-wide build or test entrypoint at the repository root. Use lightweight validation commands while editing:
+### 项目级别验证
+当前仓库没有统一的构建入口，但可以使用以下命令进行基础验证：
 
-- `rg --files AI_Agent_LLM_学习路径`: list tracked curriculum files quickly
-- `find AI_Agent_LLM_学习路径 -name README.md | sort`: verify chapter coverage
-- `git diff -- AGENTS.md`: review documentation edits before commit
+**使用可用工具验证章节覆盖：**
+```powershell
+# 列出所有 README.md 文件
+Get-ChildItem -Path "AI_Agent_LLM_学习路径" -Filter "README.md" -Recurse | Select-Object FullName | Sort-Object FullName
 
-For code added inside a chapter, document its own run and test commands in that chapter’s `代码考试` or `实际项目` README.
+# 或使用 glob 模式
+glob -pattern "**/README.md" -path "E:\project\halosky\py\halo-llm\AI_Agent_LLM_学习路径"
+```
+
+**检查章节结构完整性：**
+```powershell
+# 验证每个章节是否包含 4 个必需的子目录
+$stages = Get-ChildItem -Path "AI_Agent_LLM_学习路径\阶段*" -Directory
+foreach ($stage in $stages) {
+    $chapters = Get-ChildItem -Path $stage.FullName -Directory
+    foreach ($chapter in $chapters) {
+        $subdirs = @("学习资料", "理论考试", "代码考试", "实际项目")
+        $existing = Get-ChildItem -Path $chapter.FullName -Directory | Select-Object -ExpandProperty Name
+        $missing = $subdirs | Where-Object { $_ -notin $existing }
+        if ($missing) {
+            Write-Host "缺少子目录: $($chapter.Name) - $($missing -join ', ')"
+        }
+    }
+}
+```
+
+### 章节级别验证
+对于包含代码实现的章节，请在对应章节的 README.md 中记录：
+
+- **运行命令**：如何启动代码
+- **依赖说明**：requirements.txt 或 pip install 命令
+- **测试命令**：如何验证代码正确性
+- **预期输出**：运行后应该看到什么结果
 
 ## Coding Style & Naming Conventions
 
-Keep directory names aligned with the existing pattern: `阶段N_主题/章节NN_主题/子目录/README.md`. Preserve Chinese names already used across the curriculum. Write Markdown with concise headings, short paragraphs, and fenced code blocks for commands or examples. Use UTF-8 and keep shell commands copy-pastable. If a chapter includes Python examples, prefer Python 3.11+ and 4-space indentation.
+### 目录命名规范
+- 保持现有模式：`阶段N_主题/章节NN_主题/子目录/README.md`
+- 阶段编号从 0 开始，章节编号从 01 开始
+- 使用中文命名，保持与现有结构一致
+
+### 文档编写规范
+- **编码**：UTF-8
+- **格式**：Markdown
+- **标题**：简洁明了，使用层级标题
+- **段落**：短段落为主，便于阅读
+- **代码块**：使用围栏代码块，指定语言类型
+- **命令**：保持可复制粘贴，提供完整上下文
+
+### 代码编写规范
+- **Python 版本**：Python 3.11+
+- **缩进**：4 空格
+- **注释**：关键逻辑必须有注释
+- **异常处理**：必要的异常捕获和处理
+- **配置隔离**：敏感信息使用环境变量或配置文件
 
 ## Testing Guidelines
 
-This repository does not currently define a centralized automated test suite or coverage target. Treat consistency checks as the baseline: confirm every chapter keeps the four standard subfolders, and ensure any added code sample includes explicit run instructions, expected output, and dependency notes in its local README.
+### 当前状态
+仓库目前没有定义集中的自动化测试套套或覆盖率目标。
+
+### 一致性检查
+作为基准，确保：
+1. 每个章节都保持 4 个标准子目录
+2. 任何添加的代码示例都包含明确的运行说明
+3. 每个代码示例都有预期输出说明
+4. 每个代码示例都有依赖说明
+
+### 验证流程
+- 理论考试：验证概念理解
+- 代码考试：验证代码可以运行且符合要求
+- 实际项目：验证项目完成度、效果和工程化程度
 
 ## Commit & Pull Request Guidelines
 
-Git history is minimal and currently uses short lowercase subjects such as `first commit`. Continue with brief, imperative commit messages, ideally scoped to one chapter or workflow document. Pull requests should state the affected stage/chapter, summarize content changes, link any related issue, and include screenshots or logs when updating `实际项目` guidance or sample outputs.
+### Commit 规范
+- **简洁性**：使用简短、命令式的提交信息
+- **范围**：理想情况下，每次提交只涉及一个章节或工作流文档
+- **格式**：小写，动词开头，描述做了什么
+- **示例**：
+  - `add chapter01 learning materials`
+  - `update submission process`
+  - `fix broken links in chapter02`
+
+### Pull Request 规范
+- **标题**：说明影响的阶段/章节
+- **内容**：总结内容变更
+- **关联**：如有相关 issue，请链接
+- **附件**：更新 `实际项目` 指导或示例输出时，包含截图或日志
+
+### 提交流程
+完成章节后，按照 `提交流程.md` 中的模板提交：
+1. 理论考试答案
+2. 代码仓库或关键文件路径
+3. 运行说明
+4. 项目结果截图或日志
+5. 复盘总结
+
+## 当前学习状态
+
+### 最新状态（2026-03-25）
+- **当前阶段**：阶段0_准备与基础
+- **当前章节**：章节01_LLM基础与工程环境
+- **整体进度**：0 / 12
+- **当前任务**：开始阅读学习资料，并完成最小开发环境搭建
+- **当前阻塞**：无
+
+### 快速入口
+- [学习路径总览](AI_Agent_LLM_学习路径/README.md)
+- [当前学习状态](AI_Agent_LLM_学习路径/当前学习状态.md)
+- [学习进度总览](AI_Agent_LLM_学习路径/学习进度总览.md)
+- [提交流程](AI_Agent_LLM_学习路径/提交流程.md)
+- [评分与晋级规则](AI_Agent_LLM_学习路径/评分与晋级规则.md)
+
+## How to Start
+
+### 新学习者
+1. 阅读 [AI_Agent_LLM_学习路径/README.md](AI_Agent_LLM_学习路径/README.md)，了解全局路线
+2. 查看 [当前学习状态.md](AI_Agent_LLM_学习路径/当前学习状态.md)，找到当前章节
+3. 按顺序完成：学习资料 → 理论考试 → 代码考试 → 实际项目
+4. 按照 [提交流程.md](AI_Agent_LLM_学习路径/提交流程.md) 提交结果
+5. 根据 [评分与晋级规则.md](AI_Agent_LLM_学习路径/评分与晋级规则.md) 接受评分
+6. 更新 [学习进度总览.md](AI_Agent_LLM_学习路径/学习进度总览.md) 和 [当前学习状态.md](AI_Agent_LLM_学习路径/当前学习状态.md)
+
+### 断点恢复
+1. 直接说"继续学习"或"继续第X章"
+2. AI 助手会自动读取当前状态文件
+3. 根据你的最新状态继续讲解、出题、评分或复盘
+
+## 常见问题
+
+### Q: 可以跳章节学习吗？
+A: 不建议。这个路径是渐进式的，后期的章节依赖前面的基础。
+
+### Q: 每个章节需要多长时间？
+A: 取决于你的基础：
+- 有经验的开发者：每周 2 个章节，约 6-8 周
+- 初学者：每周 1 个章节，约 3 个月
+- 时间分配建议：学习资料 20%、理论考试 15%、代码考试 30%、实际项目 35%
+
+### Q: 如果某个章节通不过怎么办？
+A: 根据评分反馈修正薄弱项，重新提交。理论不过重答重点题，代码不过修复 bug，项目不过补齐缺失的维度。
+
+### Q: 学习中断后如何继续？
+A: 查看"当前学习状态.md"，AI 助手会帮你快速恢复上下文。
+
+## One-Line Pitch
+
+一个把 **学习路径**、**工程训练**、**项目实战**、**评分晋级** 和 **长期进度管理** 打包在一起的 LLM / Agent 工程仓库。
+
+不是让你"知道"，而是让你"做成"。
