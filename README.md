@@ -52,7 +52,7 @@
 
 ## 使用方式
 - `openclaw`: 如果使用的是claw类应用，直接将项目发给claw，让它根据当前项目环境进行学习
-- `web AI`: 如果使用的是grok/gemini/gpt，可以直接通过将此README设置关键字的方式进行阶段式学习
+- `web AI`: 如果使用的是grok/gemini/gpt，可以直接通过AI_INSTRUCTIONS.md设置关键字的方式进行阶段式学习
 - `CLi AI`(推荐方式): 初始化项目后，直接开始学习即可，简单高效。 
  
 ## Roadmap
